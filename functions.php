@@ -121,6 +121,7 @@ function get_recipe_category($recipe_id){
 //End of Class 25.10
 //Class 25.15
 //echo check_ajax_referer('reservation', 'rn');
+
 function meal_process_reservation(){
 	if (check_ajax_referer('reservation', 'rn')) {
 		$name = sanitize_text_field($_POST['name']);    
@@ -129,7 +130,6 @@ function meal_process_reservation(){
         $persons = sanitize_text_field($_POST['persons']);
         $date = sanitize_text_field($_POST['date']);
         $time = sanitize_text_field($_POST['time']);
-        
         $data = array(
             'name' => $name,
             'email'=> $email,
@@ -138,7 +138,8 @@ function meal_process_reservation(){
             'date' => $date,
             'time' => $time,
         );
-    print_r($data);
+        print_r($data);
+        
         $reservation_arguments = array(
             'post_type' => 'reservation',
             'post_author' => 1,
