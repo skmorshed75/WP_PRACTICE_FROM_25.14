@@ -1,23 +1,37 @@
 <?php
+//Class 25.2
+//Class 25.7
+require_once get_theme_file_path("/lib/csf/cs-framework.php");
+require_once get_theme_file_path("/inc/metaboxes/section.php");
+//Class 25.14
+require_once get_theme_file_path("/inc/metaboxes/recipe.php");
+require_once get_theme_file_path("/inc/metaboxes/page.php");
+//Class 25.9
+require_once get_theme_file_path("/inc/metaboxes/section-banner.php");
+//Class 25.10
+require_once get_theme_file_path("/inc/metaboxes/section-featured.php");
+//Class 25.11
+require_once get_theme_file_path("/inc/metaboxes/section-gallery.php");
+//Class 25.12
+require_once get_theme_file_path("/inc/metaboxes/section-chef.php");
+//Class 25.13
+require_once get_theme_file_path("/inc/metaboxes/section-services.php");
+//Class 25.14
+require_once get_theme_file_path("/inc/metaboxes/taxonomy-featured.php");
 
-require_once get_theme_file_path('/lib/csf/cs-framework.php'); 
-require_once get_theme_file_path('/inc/metaboxes/section.php');
-require_once get_theme_file_path('/inc/metaboxes/recipe.php');
-require_once get_theme_file_path('/inc/metaboxes/page.php');
-//require_once get_theme_file_path('/inc/metaboxes/pricing.php');
-require_once get_theme_file_path('/inc/metaboxes/section-banner.php');
-require_once get_theme_file_path('/inc/metaboxes/section-featured.php');
-require_once get_theme_file_path('/inc/metaboxes/section-gallery.php');
-require_once get_theme_file_path('/inc/metaboxes/section-chef.php');
-require_once get_theme_file_path('/inc/metaboxes/section-services.php');
-//require_once get_theme_file_path('/inc/metaboxes/taxomomy-featured.php');
+define('CS_ACTIVE_FRAMEWORK', false);
+define('CS_ACTIVE_METABOX', true);
+define('CS_ACTIVE_TAXONOMY', true);
+define('CS_ACTIVE_SHORTCODE', false);
+define('CS_ACTIVE_CUSTOMIZE', false);
 
-
-define( 'CS_ACTIVE_FRAMEWORK',   false  ); // default true
-define( 'CS_ACTIVE_METABOX',     true ); // default true
-define( 'CS_ACTIVE_TAXONOMY',    true ); // default true
-define( 'CS_ACTIVE_SHORTCODE',   false ); // default true
-define( 'CS_ACTIVE_CUSTOMIZE',   false ); // default true 
+//End Class 25.7
+//echo site_url();
+//if(site_url() == "http://hellodolly.local"){
+//    define("VERSION", time());
+//} else {
+//    define("VERSION", wp_get_theme()->get("Version"));
+//}
 
 
 function meal_theme_setup(){
@@ -117,11 +131,17 @@ function meal_assets(){
     // wp_enqueue_script("meal-jquery-js","//code.jquery.com/jquery-1.11.1.min.js",null,'1.11.1',true);
 
 
-    
-
 
     if (is_page_template( "page-templates/landing.php" )) {
     	// Reservation Form Js and ajax
+        
+    //Class 25.15
+//    if(is_page_template('page-templates/landing.php')){
+//        wp_enqueue_script('meal-reservation-js',get_theme_file_uri('/assets/js/reservation.js'),array('jquery'), 1.0, true);
+//        $ajaxurl = admin_url('ajax-admin.php');
+//        wp_localize_script('meal-reservation-js','mealurl',array('ajaxurl'=> $ajaxurl));
+//    }        
+        
     	wp_enqueue_script("meal-reservation-js",get_theme_file_uri("/assets/js/reservation.js"),array('jquery'),'1.0',true);
     	$ajaxurl = admin_url("admin-ajax.php");
     	wp_localize_script("meal-reservation-js", "mealurl",array("ajaxurl" => $ajaxurl));
@@ -160,6 +180,7 @@ function get_recipe_category($recipe_id){
 
 // 2nd time write ajax related code
 function meal_process_reservation(){
+
 	if (check_ajax_referer('reservation', 'rn')) {
 		$name = sanitize_text_field($_POST['name']);
 		$email = sanitize_text_field($_POST['email']);
