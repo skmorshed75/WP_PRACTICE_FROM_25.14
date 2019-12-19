@@ -8,40 +8,21 @@ get_header();
 ?>
     <div class="main-wrap " id="section-home">
         <?php
-        //Banner Section
-        $meal_section_id = 452;
-        get_template_part('section-templates/banner');
-            
-            
-        //Featured Section
-        //$meal_section_id = 393;        
-        $meal_section_id = 444;
-        get_template_part('section-templates/featured');
-
+        //Class 25.21
+        $meal_current_page_id = get_the_ID();
+        $meal_page_meta = get_post_meta($meal_current_page_id, 'meal-page-sections', true);
+        //print_r($meal_page_meta['sections']);
+        //die();
+        foreach($meal_page_meta['sections'] as $meal_page_section):
+            $meal_section_id = $meal_page_section['section'];
+            $meal_section_meta = get_post_meta($meal_section_id,'meal-section-type', true);
+            //print_r($meal_section_meta);
+            $meal_section_type = $meal_section_meta['type'];
+            //print_r($mal_section_type);
+            get_template_part("section-templates/{$meal_section_type}");    
+        endforeach;
         
-        //Gallery / Portfolio Section
-        //$meal_section_id = 415;        
-        $meal_section_id = 449;
-        get_template_part('section-templates/gallery');
-
-        //Chefs Section
-        $meal_section_id = 453;
-        get_template_part('section-templates/chef');
-        
-        
-        //Menu Section 25.14
-        $meal_section_id = 480;
-        get_template_part('section-templates/menu');
-        
-         
-        //Services Section 25.13
-        $meal_section_id = 476;
-        get_template_part('section-templates/services');
-        
-        
-        //Reservation Section 25.15
-        $meal_section_id = 489;        
-        get_template_part('section-templates/reservation');
+        //End of Class 25.21
         ?>
 
 

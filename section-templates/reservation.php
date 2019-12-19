@@ -1,5 +1,4 @@
 <?php
-
 global $meal_section_id;
 $meal_section = get_post($meal_section_id);
 $meal_section_title = $meal_section->post_title;

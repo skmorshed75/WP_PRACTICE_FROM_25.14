@@ -23,7 +23,7 @@ function meal_section_type_metabox($metaboxes){
                             'chef'=>__('Chef','meal'),
                             'menu'=>__('Food Menu','meal'),
                             'services'=>__('Services','meal'),
-                            'reservations'=>__('Reservations','meal'),
+                            'reservation'=>__('Reservation','meal'),
                             'testimonials'=>__('Testimonials','meal'),
                             'contact'=>__('Contact','meal'),
                         )
