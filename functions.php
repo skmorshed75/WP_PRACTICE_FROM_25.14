@@ -46,6 +46,10 @@ function meal_theme_setup(){
         'comment-list'    
     ));
     add_theme_support('custom-logo');
+    
+    //Class 25.22
+    register_nav_menu('primary',__('Main Menu Meal','meal'));
+    //End of Class 25.22
 }
 add_action('after_setup_theme','meal_theme_setup');
 
