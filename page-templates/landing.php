@@ -94,6 +94,7 @@ get_header();
                 </div>
             </div>
         </div> <!-- .section -->
+<!--
 
         <div class="section" data-aos="fade-up" id="section-contact">
             <div class="container">
@@ -144,7 +145,8 @@ get_header();
                     </div>
                 </div>
             </div>
-        </div> <!-- .section -->
+        </div>  .section 
+-->
 
         <div class="map-wrap" id="map" data-aos="fade"></div>
 
