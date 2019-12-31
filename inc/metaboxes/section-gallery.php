@@ -29,10 +29,16 @@ function meal_gallery_section_metabox($metaboxes){
             array(
                 'name'=>'meal-gallery-section-one',
                 //'name' => '',
-                'icon'=>'fa fa-book',
+                'icon'=>'fa fa-image',
                 'fields'=>array(
                     array(
-                        'id'=>'portfolio',                        
+                        'id'=>'nimages',
+                        'title'=>__('Number of Images','meal'),
+                        'type'=>'text',
+                        'default' => 6,
+                    ),
+                    array(
+                        'id'=>'portfolio',
                         'type'=>'group',
                         'title'=>__('Portfolio','meal'),
                         'button_title'=>__('New Image','meal'),

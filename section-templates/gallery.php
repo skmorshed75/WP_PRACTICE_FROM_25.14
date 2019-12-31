@@ -12,7 +12,6 @@ $meal_section_meta = get_post_meta( $meal_section_id,'meal-section-gallery',true
 $meal_section = get_post($meal_section_id);
 $meal_section_title = $meal_section->post_title;
 $meal_section_description = $meal_section->post_content;
-
 ?> 
 
 <div class="section pb-3 bg-white" id="<?php echo esc_attr($meal_section->post_name); ?>" data-aos="fade-up">
@@ -31,15 +30,27 @@ $meal_section_description = $meal_section->post_content;
 <?php
 $meal_gallery_items = $meal_section_meta['portfolio'];
 $meal_item_categories= [];
+//Class 25.31
+$meal_number_of_images = $meal_section_meta['nimages'];
+//echo '<pre>';
+//print_r($meal_number_of_images);
+//echo '</pre>';
+//die();
+$meal_counter = 0;
+//End of Class 25.31
 
 foreach($meal_gallery_items as $meal_gallery_item){
+    if($meal_counter >= $meal_number_of_images){
+        break;   
+    }
     $meal_gallery_item_categories = explode(",",$meal_gallery_item['categories']);
     foreach($meal_gallery_item_categories as $meal_gallery_item_category){
         $meal_gallery_item_category = trim($meal_gallery_item_category);
         if(!in_array($meal_gallery_item_category,$meal_item_categories)){
             array_push($meal_item_categories,$meal_gallery_item_category);
-        }
+        }    
     }
+    $meal_counter++;
 }
 //print_r($meal_item_categories);
 ?>
@@ -61,10 +72,21 @@ foreach($meal_gallery_items as $meal_gallery_item){
                         
                     </ul>
                 </div>
-
-                <div class="portfolio-grid portfolio-gallery grid-4 gutter">
                     <?php
+                    wp_nonce_field('loadmorep','loadmorep');
+                    ?>
+                <div class="portfolio-grid portfolio-gallery grid-4 gutter"
+                  data-images = "<?php echo esc_attr($meal_number_of_images) ?>"
+                  data-sid = "<?php echo esc_attr($meal_section_id); ?>" 
+                  data-ni = "<?php echo esc_attr($meal_number_of_images); ?>" 
+                   >
+                   
+                    <?php
+                    $meal_counter = 0;
                     foreach($meal_gallery_items as $meal_gallery_item):
+                        if($meal_counter >= $meal_number_of_images){
+                            break;   
+                        }                    
                         $meal_item_class = str_replace(","," ",$meal_gallery_item['categories'] );
                         $meal_item_image_id = $meal_gallery_item['image'];
                         //$meal_item_title = $meal_gallery_item['title'];
@@ -73,7 +95,7 @@ foreach($meal_gallery_items as $meal_gallery_item){
                         $meal_item_categories_array = explode(",",$meal_gallery_item['categories']);
                     ?>
                         <div class="portfolio-item <?php echo esc_attr($meal_item_class); ?>">
-                            <a href="<?php echo esc_url($meal_item_large[0]); ?>" class="portfolio-image popup-gallery" title="Bread">
+                            <a href="<?php echo esc_url($meal_item_large[0]); ?>" class="portfolio-image popup-gallery">
                                 <img src="<?php echo esc_attr($meal_item_thumbnail[0]); ?>" alt=""/>
                                 <div class="portfolio-hover-title">
                                     <div class="portfolio-content">
@@ -95,11 +117,14 @@ foreach($meal_gallery_items as $meal_gallery_item){
                             </a>
                         </div>                    
                     <?php
+                    $meal_counter++;
                     endforeach;
                     ?>
 
                 </div>
+                <button id="loadmorepb"><?php _e('Load More','meal'); ?></button>
             </div>
+
         </div>
     </div>
 </div> <!-- .section -->
